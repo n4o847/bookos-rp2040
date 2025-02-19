@@ -26,10 +26,14 @@ sudo apt install binutils-arm-none-eabi
 ## ビルド
 
 ```bash
-cargo build
+cargo xtask build
 ```
 
-TODO: リリースビルドに対応する
+リリースモードでビルドする場合は以下を実行します。
+
+```bash
+cargo xtask build --release
+```
 
 ## 書き込みと実行
 
@@ -38,7 +42,7 @@ TODO: リリースビルドに対応する
 Rapsberry Pi Pico の BOOTSEL ボタンを押しながらホストに接続し、以下を実行します。
 
 ```bash
-sudo picotool load -x target/thumbv6m-none-eabi/debug/bookos-rp2040 -t elf
+sudo picotool load -x ws/target/thumbv6m-none-eabi/debug/app -t elf
 ```
 
 TODO: UF2 への変換を自分で行う
@@ -68,7 +72,7 @@ openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
 GDB で接続します。
 
 ```bash
-gdb-multiarch target/thumbv6m-none-eabi/debug/bookos-rp2040
+gdb-multiarch ws/target/thumbv6m-none-eabi/debug/app
 (gdb) target remote localhost:3333
 (gdb) load
 (gdb) monitor reset init

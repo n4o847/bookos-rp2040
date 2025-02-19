@@ -1,0 +1,14 @@
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+opt-level = 3
+lto = true
+
+[workspace]
+members = [
+    "app",
+    "boot2",
+    "rt",
+]
+resolver = "2"
